@@ -37,7 +37,7 @@
 
 ## <a name="update"></a>:new:Update
 
-- **2025.7.29**: ✅ We've released our new work [HYPIR](https://github.com/XPixelGroup/HYPIR)! It **significantly outperforms DiffBIR**🔥🔥🔥, while also being **tens of times faster**🔥🔥🔥. We welcome you to try it out.
+- **2025.07.29**: ✅ We've released our new work [HYPIR](https://github.com/XPixelGroup/HYPIR)! It **significantly outperforms DiffBIR**🔥🔥🔥, while also being **tens of times faster**🔥🔥🔥. We welcome you to try it out.
 - **2024.11.27**: ✅ Release DiffBIR v2.1, including a **new model** trained on unsplash dataset with [LLaVA]()-generated captions, more samplers, better tiled-sampling support and so on. Check [release note](https://github.com/XPixelGroup/DiffBIR/releases/tag/v2.1.0) for details.
 - **2024.04.08**: ✅ Release everything about our [updated manuscript](https://arxiv.org/abs/2308.15070), including (1) a **new model** trained on subset of laion2b-en and (2) a **more readable code base**, etc. DiffBIR is now a general restoration pipeline that could handle different blind image restoration tasks with a unified generation module.
 - **2023.09.19**: ✅ Add support for Apple Silicon! Check [installation_xOS.md](assets/docs/installation_xOS.md) to work with **CPU/CUDA/MPS** device!
