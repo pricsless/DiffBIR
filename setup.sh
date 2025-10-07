@@ -5,16 +5,30 @@ echo "=================================="
 echo "DiffBIR Quick Setup for Vast.ai"
 echo "=================================="
 
-# Copy environment.yml to workspace root (parent directory)
-echo "Copying environment.yml to workspace..."
-cp environment.yml ../environment.yml
+# Create a minimal environment.yml without pip dependencies
+echo "Creating minimal conda environment..."
+cat > ../environment-minimal.yml << 'EOL'
+name: diffbir
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - ffmpeg
+  - git
+  - curl
+  - wget
+EOL
 
 # Navigate to workspace root
 cd ..
 
-# Create conda environment
-echo "Creating conda environment..."
-conda env create -f environment.yml -y
+# Create conda environment (without pip packages)
+echo "Setting up conda environment..."
+conda env create -f environment-minimal.yml -y
 
 # Activate environment
 echo "Activating environment..."
@@ -28,7 +42,7 @@ python --version
 # Go back to DiffBIR directory
 cd DiffBIR
 
-# Install PyTorch packages
+# Install PyTorch packages with proper index URL
 echo "Installing PyTorch packages..."
 pip install torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
