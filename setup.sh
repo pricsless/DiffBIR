@@ -93,9 +93,9 @@ echo "Or run the quick start script:"
 echo "  bash run.sh"
 echo ""
 
-# Ask if user wants to start immediately
-read -p "Do you want to start DiffBIR now? (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    python run_gradio.py --captioner llava --share
-fi
+# # Ask if user wants to start immediately
+# read -p "Do you want to start DiffBIR now? (y/n) " -n 1 -r
+# echo
+# if [[ $REPLY =~ ^[Yy]$ ]]; then
+#     python run_gradio.py --captioner llava --share
+# fi
