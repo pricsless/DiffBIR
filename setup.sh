@@ -6,6 +6,7 @@ echo "DiffBIR Quick Setup for Vast.ai"
 echo "=================================="
 
 # Create a minimal environment.yml without pip dependencies
+# IMPORTANT: Install to /workspace so it's saved on the volume
 echo "Creating minimal conda environment..."
 cat > ../environment-minimal.yml << 'EOL'
 name: diffbir
@@ -26,14 +27,14 @@ EOL
 # Navigate to workspace root
 cd ..
 
-# Create conda environment (without pip packages)
-echo "Setting up conda environment..."
-conda env create -f environment-minimal.yml -y
+# Create conda environment in /workspace (so it persists on volume)
+echo "Setting up conda environment in /workspace..."
+conda env create -f environment-minimal.yml -p /workspace/diffbir_env -y
 
 # Activate environment
 echo "Activating environment..."
 source $(conda info --base)/etc/profile.d/conda.sh
-conda activate diffbir
+conda activate /workspace/diffbir_env
 
 # Verify Python version
 echo "Python version:"
@@ -84,9 +85,11 @@ echo "=================================="
 echo "Installation complete!"
 echo "=================================="
 echo ""
+echo "IMPORTANT: Environment installed to /workspace/diffbir_env (saved on volume)"
+echo ""
 echo "To run DiffBIR, use:"
-echo "  conda activate diffbir"
-echo "  cd DiffBIR"
+echo "  conda activate /workspace/diffbir_env"
+echo "  cd /workspace/DiffBIR"
 echo "  python run_gradio.py --captioner llava --share"
 echo ""
 echo "Or run the quick start script:"
