@@ -94,6 +94,9 @@ echo "Or run the quick start script:"
 echo "  cd /data/DiffBIR && bash run.sh"
 echo ""
 
+# Navigate to DiffBIR directory
+cd /data/DiffBIR
+
 # Ask if user wants to start immediately
 read -p "Do you want to start DiffBIR now? (y/n) " -n 1 -r
 echo
