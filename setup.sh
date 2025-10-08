@@ -4,11 +4,15 @@ set -e  # Exit on error
 echo "=================================="
 echo "DiffBIR Quick Setup for Vast.ai"
 echo "=================================="
+echo "Installing to /data (persistent volume)"
+echo "=================================="
+
+# Navigate to /data (the persistent volume)
+cd /data
 
 # Create a minimal environment.yml without pip dependencies
-# IMPORTANT: Install to /workspace so it's saved on the volume
 echo "Creating minimal conda environment..."
-cat > ../environment-minimal.yml << 'EOL'
+cat > environment-minimal.yml << 'EOL'
 name: diffbir
 channels:
   - pytorch
@@ -24,24 +28,18 @@ dependencies:
   - wget
 EOL
 
-# Navigate to workspace root
-cd ..
-
-# Create conda environment in /workspace (so it persists on volume)
-echo "Setting up conda environment in /workspace..."
-conda env create -f environment-minimal.yml -p /workspace/diffbir_env -y
+# Create conda environment in /data (so it persists on volume)
+echo "Setting up conda environment in /data..."
+conda env create -f environment-minimal.yml -p /data/diffbir_env -y
 
 # Activate environment
 echo "Activating environment..."
 source $(conda info --base)/etc/profile.d/conda.sh
-conda activate /workspace/diffbir_env
+conda activate /data/diffbir_env
 
 # Verify Python version
 echo "Python version:"
 python --version
-
-# Go back to DiffBIR directory
-cd DiffBIR
 
 # Install PyTorch packages with proper index URL
 echo "Installing PyTorch packages..."
@@ -85,15 +83,15 @@ echo "=================================="
 echo "Installation complete!"
 echo "=================================="
 echo ""
-echo "IMPORTANT: Environment installed to /workspace/diffbir_env (saved on volume)"
+echo "IMPORTANT: Everything installed to /data (your persistent volume)"
 echo ""
 echo "To run DiffBIR, use:"
-echo "  conda activate /workspace/diffbir_env"
-echo "  cd /workspace/DiffBIR"
+echo "  conda activate /data/diffbir_env"
+echo "  cd /data/DiffBIR"
 echo "  python run_gradio.py --captioner llava --share"
 echo ""
 echo "Or run the quick start script:"
-echo "  bash run.sh"
+echo "  cd /data/DiffBIR && bash run.sh"
 echo ""
 
 # Ask if user wants to start immediately
